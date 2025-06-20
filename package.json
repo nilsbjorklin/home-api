@@ -1,0 +1,19 @@
+{
+  "name": "home-api",
+  "version": "1.0.0",
+  "description": "Home api",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/nilsbjorklin/home-api.git"
+  },
+  "author": "Nils Björklin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nilsbjorklin/home-api/issues"
+  },
+  "homepage": "https://github.com/nilsbjorklin/home-api#readme"
+}
