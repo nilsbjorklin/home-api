@@ -4,6 +4,7 @@ import swaggerui from '@fastify/swagger-ui'
 import { TypeBoxTypeProvider } from '@fastify/type-provider-typebox'
 import { weatherPlugin } from './routes/weather.js'
 import 'dotenv/config'
+import { homeAssistantPlugin } from './routes/homeAssistant.js'
 
 const server = fastify({logger:true}).withTypeProvider<TypeBoxTypeProvider>()
 await server.register(swagger, {
@@ -38,6 +39,7 @@ await server.register(swaggerui, {
 })
 
 await server.register(weatherPlugin, {prefix: '/weather'})
+await server.register(homeAssistantPlugin, {prefix: '/home-assistant'})
 
 await server.listen({ port: Number(process.env.PORT || 3000),  host: '0.0.0.0'}, (err, address) => {
   if (err) {

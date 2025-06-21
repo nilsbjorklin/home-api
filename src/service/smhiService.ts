@@ -5,8 +5,8 @@ import { ParameterListResponse } from "../models/smhi/parameterListResponse.js";
 import { logger } from "../index.js";
 import { ParameterResponse } from "../models/smhi/parameterResponse.js";
 
-const basePath = process.env.SMHI_BASE_URL + '/api/version/latest'
-const get = async (url: URL) => {
+const get = async (path:string) => {
+    const url: URL = new URL('/api/version/latest' + path, process.env.SMHI_BASE_URL);
     logger.info({url: url.toString(), method: 'GET'}, 'Outgoing request to SMHI API');
     const response = await fetch(url, {headers: {'Accept': 'application/json'}});
     if (!response.ok) {
@@ -20,14 +20,11 @@ const get = async (url: URL) => {
     
 }
 export const getParameters = async (): Promise<ParameterListResponse> => {
-    const dataUrl =new URL(`${basePath}/parameter.json`);
-    return await get(dataUrl)
+    return await get('/parameter.json')
 }
 export const getParameter = async (parameterKey: string): Promise<ParameterResponse> => {
-    const dataUrl =new URL(`${basePath}/parameter/${parameterKey}.json`)
-    return await get(dataUrl)
+    return await get(`/parameter/${parameterKey}.json`)
 }
 export const getData = async (parameterKey: string, stationKey:string): Promise<DataResponse> => {
-    const dataUrl =new URL(`${basePath}/parameter/${parameterKey}/station/${stationKey}/period/latest-day/data.json`)
-    return await get(dataUrl)
+    return await get(`/parameter/${parameterKey}/station/${stationKey}/period/latest-day/data.json`)
 }
